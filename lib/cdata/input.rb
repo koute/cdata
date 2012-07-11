@@ -314,6 +314,12 @@ module CData
             name.downcase!
             name << "_t"
 
+            if klass.methods( false ).include?( :cdata_name )
+
+                name = klass.cdata_name
+
+            end
+
             type.native_name = name
 
             if klass.superclass != Object
