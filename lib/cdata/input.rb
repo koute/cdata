@@ -306,6 +306,8 @@ module CData
 
             return @klass_to_klass_type[ klass ] if @klass_to_klass_type.has_key? klass
 
+            methods = klass.methods( false )
+
             type = ClassType.new
 
             name = klass.to_s
@@ -314,11 +316,7 @@ module CData
             name.downcase!
             name << "_t"
 
-            if klass.methods( false ).include?( :cdata_name )
-
-                name = klass.cdata_name
-
-            end
+            name = klass.cdata_name if methods.include?( :cdata_name )
 
             type.native_name = name
 
@@ -354,10 +352,10 @@ module CData
 
             end
 
-            if klass.methods( false ).include?( :cdata_methods )
+            if methods.include?( :cdata_methods )
 
                 renamed_methods = {}
-                if klass.methods( false ).include?( :cdata_rename )
+                if methods.include?( :cdata_rename )
 
                     renamed_methods = klass.cdata_rename
 
