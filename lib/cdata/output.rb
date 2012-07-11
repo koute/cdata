@@ -369,7 +369,7 @@ module CData
 
                         if type.includes_type?
 
-                            fp.puts "    const cdata_type_t * const type;"
+                            fp.puts "    const cdata_type_t * const #{type.cdata_type_variable_name};"
 
                         end
 
