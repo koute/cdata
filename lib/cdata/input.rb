@@ -370,6 +370,8 @@ module CData
                         name = renamed_methods[ name ]
                     end
 
+                    name = "is_#{name.to_s[ 0..-2 ]}" if name.to_s.end_with? '?'
+
                     type.cached_methods << [ type, klass, method, name ]
                     type.children[ name ] = TypeChild.new
 
