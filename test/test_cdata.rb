@@ -401,6 +401,8 @@ test [ Structure.new( 1, true, 1.0, "1", [], {} ), Structure.new() ]
 
 test [ [ 1, true, 1.0, "1", [], {}, Structure.new ] ]
 
+test [ Structure.new( 1000 ), Structure.new( 1 ) ]
+
 test do |s|
 
     s.serialize( true, 't1' )
