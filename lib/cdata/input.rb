@@ -310,6 +310,7 @@ module CData
 
             name = klass.to_s
             name = name.gsub( /([a-z])([A-Z])/ ) { "#{$1}_#{$2}" }
+            name.gsub!( '::', '_' )
             name.downcase!
             name << "_t"
 
