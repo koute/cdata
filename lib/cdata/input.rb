@@ -213,9 +213,9 @@ module CData
 
                 end
 
-                type.cached_methods.each do |type, klass, method|
+                type.cached_methods.each do |type, klass, method, name|
 
-                    method_qualified_path = "#{klass}.#{method}"
+                    method_qualified_path = "#{klass}.#{name}"
 
                     child = value.send( method )
                     registered_child = register( child, nil, false, true, method_qualified_path )
@@ -223,7 +223,7 @@ module CData
                     @types_for_qualified_path[ method_qualified_path ] ||= Set.new
                     @wrappers_for_qualified_path[ method_qualified_path ] ||= []
 
-                    member = type.children[ method ]
+                    member = type.children[ name ]
                     member.type = member.type.resolve_type( registered_child.type )
                     member.types.add registered_child.type
 
@@ -356,10 +356,24 @@ module CData
 
             if klass.methods( false ).include?( :cdata_methods )
 
+                renamed_methods = {}
+                if klass.methods( false ).include?( :cdata_rename )
+
+                    renamed_methods = klass.cdata_rename
+
+                end
+
                 klass.cdata_methods.each do |method|
 
-                    type.cached_methods << [ type, klass, method ]
-                    type.children[ method ] = TypeChild.new
+                    name = method.to_s
+                    if renamed_methods.has_key? method
+                        name = renamed_methods[ method ]
+                    elsif renamed_methods.has_key? name
+                        name = renamed_methods[ name ]
+                    end
+
+                    type.cached_methods << [ type, klass, method, name ]
+                    type.children[ name ] = TypeChild.new
 
                 end
 
