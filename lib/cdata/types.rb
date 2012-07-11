@@ -125,7 +125,7 @@ module CData
 
             if self.instance_of?( IntType ) && new_type.instance_of?( IntType )
 
-                return new_type if self.size_tier >= new_type.size_tier && self.unsigned? == new_type.unsigned?
+                return self if self.size_tier >= new_type.size_tier && self.unsigned? == new_type.unsigned?
 
                 needs_signed = false
                 needs_signed = true  if self.signed? || new_type.signed?
