@@ -460,7 +460,7 @@ module CData
 
     class ClassType < Type
 
-        attr_accessor :native_name, :superclass, :cached_methods, :subclasses, :is_stringlike, :is_arraylike, :is_hashlike
+        attr_accessor :native_name, :superclass, :cached_methods, :subclasses, :is_stringlike, :is_arraylike, :is_hashlike, :additional_code
 
         # For arraylike and hashlike classes.
         attr_accessor :key_child, :value_child

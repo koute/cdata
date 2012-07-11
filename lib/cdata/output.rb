@@ -404,6 +404,13 @@ module CData
 
                             end
 
+                            if type.additional_code != nil
+                                fp.puts
+                                fp.extra_indentation += 4
+                                fp.m_puts type.additional_code
+                                fp.extra_indentation -= 4
+                            end
+
                         end
                         fp.puts "};"
                         fp.puts
