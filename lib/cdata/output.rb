@@ -411,6 +411,11 @@ module CData
                                 fp.extra_indentation -= 4
                             end
 
+                            fp.puts unless type.custom_methods.empty?
+                            type.custom_methods.each do |return_type, name, args, code|
+                                fp.puts "    #{return_type} #{name}(#{args}) const;"
+                            end
+
                         end
                         fp.puts "};"
                         fp.puts
@@ -444,6 +449,33 @@ module CData
 
             fp = CData::StringIO.new
             generate_source_start( fp )
+
+            fp.puts "/* Custom methods. */"
+            sorted_custom_types.each do |list|
+
+                done = Set.new
+                list.each do |current_type|
+
+                    next if done.include? current_type
+                    done.add current_type
+
+                    current_type.superclass_tree_from_bottom.reverse.each do |type|
+
+                        type.custom_methods.each do |return_type, name, args, code|
+                            fp.puts "#{return_type} #{current_type.native_name} :: #{name}(#{args}) const"
+                            fp.puts "{"
+                            fp.extra_indentation += 4
+                            fp.m_puts code
+                            fp.extra_indentation -= 4
+                            fp.puts "}"
+                            fp.puts
+                        end
+
+                    end
+
+                end
+
+            end
 
             unless types.empty?
 

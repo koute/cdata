@@ -321,6 +321,7 @@ module CData
             type.native_name = name
             type.additional_code = klass.cdata_code if methods.include?( :cdata_code )
             type.cdata_type_variable_name = klass.cdata_type_variable_name if klass.methods.include?( :cdata_type_variable_name )
+            type.custom_methods = klass.cdata_custom_methods if methods.include?( :cdata_custom_methods )
 
             if klass.superclass != Object
 
