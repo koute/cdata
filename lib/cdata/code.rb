@@ -320,6 +320,11 @@ module CData
                     return data[ index ];
                 }
 
+                #{value_t} get( const unsigned index ) const
+                {
+                    return data[ index ];
+                }
+
                 class iterator
                 {
                     const #{type_t}& m_array;
