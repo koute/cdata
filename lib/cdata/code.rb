@@ -44,11 +44,11 @@ module CData
 
                 #if __GNUC__ >= 4
 
-					#ifndef __llvm__
-	                    #pragma GCC diagnostic push
-	                    #pragma GCC diagnostic ignored "-Wignored-qualifiers"
-	                    #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-	                #endif
+                    #ifndef __llvm__
+                        #pragma GCC diagnostic push
+                        #pragma GCC diagnostic ignored "-Wignored-qualifiers"
+                        #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+                    #endif
                     #pragma GCC visibility push( hidden )
 
                     #if __GNUC_MINOR__ >= 4
@@ -258,9 +258,9 @@ module CData
             fp.m_puts <<-EOS
 
                 #if __GNUC__ >= 4
-                	#ifndef __llvm__
-	                    #pragma GCC diagnostic pop
-	                #endif
+                    #ifndef __llvm__
+                        #pragma GCC diagnostic pop
+                    #endif
                     #pragma GCC visibility pop
 
                     #if __GNUC_MINOR__ >= 4
