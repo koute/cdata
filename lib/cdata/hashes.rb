@@ -50,7 +50,7 @@ begin
             unsigned int cdata_hash()
             {
                 const char * string = RSTRING_PTR( self );
-                unsigned int length = RSTRING_LEN( self );
+                long length = RSTRING_LEN( self );
 
                 unsigned int hash = 0;
                 unsigned int i = 0;
