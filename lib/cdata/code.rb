@@ -44,9 +44,11 @@ module CData
 
                 #if __GNUC__ >= 4
 
-                    #pragma GCC diagnostic push
-                    #pragma GCC diagnostic ignored "-Wignored-qualifiers"
-                    #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+					#ifndef __llvm__
+	                    #pragma GCC diagnostic push
+	                    #pragma GCC diagnostic ignored "-Wignored-qualifiers"
+	                    #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+	                #endif
                     #pragma GCC visibility push( hidden )
 
                     #if __GNUC_MINOR__ >= 4
@@ -171,13 +173,13 @@ module CData
 
                     /* Comparison functions used for hashes; feel free to add your own specializations. */
                     template < typename type_t >
-                    inline bool cdata_compare( const type_t& a, const type_t& b )
+                    inline bool cdata_compare( type_t a, type_t b )
                     {
                         return a == b;
                     }
 
                     template <>
-                    inline bool cdata_compare< const char *& >( const char *& a, const char *& b )
+                    inline bool cdata_compare< const char * >( const char * a, const char * b )
                     {
                         return !strcmp( a, b );
                     }
@@ -256,7 +258,9 @@ module CData
             fp.m_puts <<-EOS
 
                 #if __GNUC__ >= 4
-                    #pragma GCC diagnostic pop
+                	#ifndef __llvm__
+	                    #pragma GCC diagnostic pop
+	                #endif
                     #pragma GCC visibility pop
 
                     #if __GNUC_MINOR__ >= 4
