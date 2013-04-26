@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'cdata'
-  s.version     = '1.0.2'
-  s.date        = '2012-07-05'
+  s.version     = '1.0.3'
+  s.date        = Date.today.to_s
   s.summary     = "C/C++ Data Serializer"
   s.description = "Serializes your Ruby data to static C++ structures you can use in your C++ code."
   s.authors     = ["Jan Bujak"]
